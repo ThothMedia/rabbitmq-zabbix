@@ -104,6 +104,15 @@ class RabbitMQAPI(object):
             value = queue.get(item, 0)
             logging.debug("SENDER_DATA: - %s %s" % (key,value))
             tmpfile.write("- %s %s\n" % (key, value))
+        for item in ['idle_since']:
+            key = '"rabbitmq.queues[{0},queue_{1},{2}]"'
+            key = key.format(queue['vhost'], item, queue['name'])
+            if (queue.get(item, 0)) == 0:
+                value = 0
+            else:
+                value = time.mktime(datetime.datetime.strptime(str(queue.get(item, '2016-01-01 00:00:00')), '%Y-%m-%d %H:%M:%S').timetuple())
+            logging.debug("SENDER_DATA: - %s %s" % (key,value))
+            tmpfile.write("- %s %s\n" % (key, value))
         ##  This is a non standard bit of information added after the standard items
         for item in ['deliver_get', 'publish']:
             key = '"rabbitmq.queues[{0},queue_message_stats_{1},{2}]"'
