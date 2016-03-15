@@ -11,6 +11,8 @@ import subprocess
 import tempfile
 import os
 import logging
+import datetime
+import time
 
 logging.basicConfig(filename='/var/log/zabbix/rabbitmq_zabbix.log', level=logging.WARNING, format='%(asctime)s %(levelname)s: %(message)s')
 
