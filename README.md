@@ -27,7 +27,7 @@ The default values are as follows:
 
     USERNAME=guest
     PASSWORD=guest
-    CONF=/etc/zabbix/zabbix_agent.conf
+    CONF=/etc/zabbix/zabbix_agentd.conf
 
 You can also add a filter in this file to restrict which queues are monitored.
 This item is a JSON-encoded string. The format provides some flexibility for

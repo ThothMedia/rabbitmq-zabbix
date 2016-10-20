@@ -22,7 +22,7 @@ python のスクリプト群、Zabbix テンプレート、及び自動発見の
 
     USERNAME=guest
     PASSWORD=guest
-    CONF=/etc/zabbix/zabbix_agent.conf
+    CONF=/etc/zabbix/zabbix_agentd.conf
 
 このファイルにフィルタを追加することもでき、そうするとどのキューをモニタするかを厳格化できる。このアイテムは JSONでエンコードされた文字列である。使用するのが柔軟になるようなフォーマットになっている。フィルタするために、単一のオブジェクトまたはオブジェクトのリストを設定することもできる。使用可能なキーは、status, node, name, consumers, vhost, durable,
 exclusive_consumer_tag, auto_delete, memory, policy である。

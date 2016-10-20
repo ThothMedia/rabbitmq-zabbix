@@ -12,8 +12,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template App RabbitMQ v3</template>
-            <name>Template App RabbitMQ v3</name>
+            <template>Customized Template for RabbitMQ Monitoring</template>
+            <name>Customized Template for RabbitMQ Monitoring</name>
             <description/>
             <groups>
                 <group>
@@ -76,8 +76,8 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>RabbitMQ Message Deliver Rates</name>
-                    <type>7</type>
+                    <name>RabbitMQ Server Memory Percent Used</name>
+                    <type>15</type>
                     <snmp_community/>
                     <multiplier>1</multiplier>
                     <snmp_oid/>
@@ -811,7 +811,7 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>rabbitmq.queues[{#VHOSTNAME},queue_messages_unacknowledged,{#QUEUENAME}]</key>
+                            <key>rabbitmq.queues[{#VHOSTNAME},queue_consumers,{#QUEUENAME}]</key>
                             <delay>0</delay>
                             <history>7</history>
                             <trends>90</trends>
@@ -854,7 +854,7 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>rabbitmq.queues[{#VHOSTNAME},queue_message_stats_deliver_get,{#QUEUENAME}]</key>
+                            <key>rabbitmq.queues[{#VHOSTNAME},queue_idle_since,{#QUEUENAME}]</key>
                             <delay>0</delay>
                             <history>7</history>
                             <trends>90</trends>
@@ -978,12 +978,12 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>RabbitMQ $2 on queue $3</name>
+                            <name>RabbitMQ  $2 on queue $3</name>
                             <type>2</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>rabbitmq.queues[{#VHOSTNAME},queue_message_stats_publish,{#QUEUENAME}]</key>
+                            <key>rabbitmq.queues[{#VHOSTNAME},queue_messages_unacknowledged,{#QUEUENAME}]</key>
                             <delay>0</delay>
                             <history>7</history>
                             <trends>365</trends>
@@ -1010,7 +1010,7 @@
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>Rate of message delivery to a consumer per queue</description>
+                            <description>Number of unacknowledged messages in queue</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -1026,7 +1026,7 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>rabbitmq.queues[{#VHOSTNAME},queue_messages,{#QUEUENAME}]</key>
+                            <key>rabbitmq.queues[{#VHOSTNAME},queue_message_stats_deliver_get,{#QUEUENAME}]</key>
                             <delay>0</delay>
                             <history>7</history>
                             <trends>365</trends>
@@ -1062,7 +1062,6 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>RabbitMQ $2 on queue $3</name>
@@ -1117,7 +1116,6 @@
                             <priority>2</priority>
                             <description/>
                             <type>0</type>
-                            <dependencies/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.queues[{#VHOSTNAME},queue_messages,{#QUEUENAME}].last(0)}&gt;1000</expression>
@@ -1127,7 +1125,6 @@
                             <priority>4</priority>
                             <description/>
                             <type>0</type>
-                            <dependencies/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.queues[{#VHOSTNAME},queue_messages,{#QUEUENAME}].nodata(45m)}=1</expression>
@@ -1138,7 +1135,6 @@
                             <description>No data received on queue {#VHOSTNAME}/{#QUEUENAME}&#13;
 for 45 minutes</description>
                             <type>0</type>
-                            <dependencies/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.queues[{#VHOSTNAME},queue_consumers,{#QUEUENAME}].max(120)}=0 and {Customized Template for RabbitMQ Monitoring:rabbitmq.queues[{#VHOSTNAME},queue_messages,{#QUEUENAME}].max(120)}&lt;&gt;0</expression>
@@ -1148,7 +1144,6 @@ for 45 minutes</description>
                             <priority>3</priority>
                             <description/>
                             <type>0</type>
-                            <dependencies/>
                         </trigger_prototype>
                     </trigger_prototypes>
                     <graph_prototypes>
@@ -1285,7 +1280,7 @@ for 45 minutes</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template App RabbitMQ v3:rabbitmq.shovels[{#VHOSTNAME},shovel_state,{#SHOVELNAME}].str(running,1)}=0</expression>
+                            <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.shovels[{#VHOSTNAME},shovel_state,{#SHOVELNAME}].str(running,1)}=0</expression>
                             <name>Shovel {#SHOVELNAME} on Vhost {#VHOSTNAME} is not running</name>
                             <url/>
                             <status>0</status>
@@ -1312,7 +1307,6 @@ for 45 minutes</description>
             <priority>4</priority>
             <description/>
             <type>0</type>
-            <dependencies/>
         </trigger>
         <trigger>
             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.server.filedesc.percentused.last(0)}&gt;50</expression>
@@ -1337,7 +1331,6 @@ for 45 minutes</description>
             <priority>4</priority>
             <description/>
             <type>0</type>
-            <dependencies/>
         </trigger>
         <trigger>
             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.server.mem.percentused.last(0)}&gt;50</expression>
@@ -1362,7 +1355,6 @@ for 45 minutes</description>
             <priority>4</priority>
             <description/>
             <type>0</type>
-            <dependencies/>
         </trigger>
         <trigger>
             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq.server.sockets.percentused.last(0)}&gt;50</expression>
@@ -1387,10 +1379,9 @@ for 45 minutes</description>
             <priority>4</priority>
             <description/>
             <type>0</type>
-            <dependencies/>
         </trigger>
         <trigger>
-            <expression>{Template App RabbitMQ v3:rabbitmq[queues].last(0)}=1 or {Template App RabbitMQ v3:rabbitmq[queues].nodata(5m)}=1</expression>
+            <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq[queues].last(0)}=1 or {Customized Template for RabbitMQ Monitoring:rabbitmq[queues].nodata(5m)}=1</expression>
             <name>Queue data status issue</name>
             <url/>
             <status>0</status>
@@ -1412,7 +1403,6 @@ for 45 minutes</description>
             <priority>3</priority>
             <description>RabbitMQ Cluster is in a BAD state!</description>
             <type>0</type>
-            <dependencies/>
         </trigger>
         <trigger>
             <expression>{Customized Template for RabbitMQ Monitoring:rabbitmq[server,rabbitmq_version].diff(0)}&gt;0</expression>
@@ -1422,7 +1412,6 @@ for 45 minutes</description>
             <priority>2</priority>
             <description/>
             <type>0</type>
-            <dependencies/>
         </trigger>
     </triggers>
     <graphs>
