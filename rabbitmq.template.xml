@@ -753,7 +753,7 @@
                         <conditions>
                             <condition>
                                 <macro>{#VHOSTNAME}</macro>
-                                <value>\/</value>
+                                <value></value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
